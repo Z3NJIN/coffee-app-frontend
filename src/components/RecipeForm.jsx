@@ -103,11 +103,11 @@ function RecipeForm() {
                 id="coffeeDoseGrams"
                 name="coffeeDoseGrams"
                 type="number"
-                step="0.1"
+                step="1"
                 min="0"
                 value={form.coffeeDoseGrams}
                 onChange={handleChange}
-                placeholder="18"
+                placeholder="20"
                 required
               />
             </div>
@@ -118,11 +118,11 @@ function RecipeForm() {
                 id="waterDoseGrams"
                 name="waterDoseGrams"
                 type="number"
-                step="0.1"
+                step="1"
                 min="0"
                 value={form.waterDoseGrams}
                 onChange={handleChange}
-                placeholder="288"
+                placeholder="300"
                 required
               />
             </div>
