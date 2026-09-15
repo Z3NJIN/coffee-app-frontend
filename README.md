@@ -1,4 +1,4 @@
-# ☕ Coffee API
+# ☕ Coffee APP
 
 API REST para registrar recetas de café de especialidad, llevar una bitácora de preparaciones con notas de cata, y ver la evolución de una receta en el tiempo.
 
