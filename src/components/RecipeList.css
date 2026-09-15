@@ -1,124 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap');
-
 .recipe-list-page {
   min-height: 100vh;
-  background: #1c1410;
-  padding: 3rem 2rem;
-  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  padding: 40px 40px 56px;
+  max-width: 1180px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .recipe-list-header {
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
-  max-width: 960px;
-  margin: 0 auto 2rem;
-  gap: 1rem;
+  align-items: flex-end;
+  gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 28px;
 }
 
 .recipe-list-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 2rem;
-  color: #f5efe6;
-  margin: 0 0 0.25rem;
-}
-
-.recipe-list-subtitle {
-  color: #a89a8a;
-  font-size: 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--ink);
+  line-height: 1.05;
   margin: 0;
 }
 
+.recipe-list-subtitle {
+  font-size: 14px;
+  color: var(--ink-muted);
+  margin: 6px 0 0;
+}
+
 .method-filter {
-  background: #2a2019;
-  border: 1px solid #3d2f24;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-input);
   border-radius: 4px;
-  padding: 0.55rem 0.75rem;
-  color: #f5efe6;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  padding: 10px 15px;
 }
 
 .method-filter:focus {
   outline: none;
-  border-color: #c9a227;
+  border-color: var(--accent);
 }
 
 .state-message {
-  max-width: 960px;
-  margin: 2rem auto;
-  color: #a89a8a;
+  color: var(--ink-muted);
   text-align: center;
   font-size: 0.95rem;
+  margin: 2rem 0;
 }
 
 .state-message.error {
-  color: #d97757;
+  color: var(--accent);
 }
 
 .recipe-grid {
-  max-width: 960px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+  gap: 16px;
 }
 
 .recipe-card {
-  display: block;
-  text-decoration: none;
-  background: #241b14;
-  border: 1px solid #3d2f24;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--accent);
   border-radius: 4px;
-  padding: 1.25rem;
-  transition: border-color 0.15s ease;
-}
-
-.recipe-card:hover {
-  border-color: #c9a227;
+  padding: 16px 18px 18px;
+  text-decoration: none;
 }
 
 .recipe-card-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 0.5rem;
+  gap: 10px;
 }
 
 .recipe-method {
-  font-size: 0.75rem;
-  color: #a89a8a;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--ink-muted);
 }
 
-.recipe-ratio {
-  font-family: 'Fraunces', serif;
-  color: #c9a227;
-  font-size: 1.1rem;
+.recipe-ratio-group {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.recipe-ratio-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  color: var(--ink-muted);
+}
+
+.recipe-ratio-value {
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: var(--accent);
 }
 
 .recipe-name {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 1.15rem;
-  color: #f5efe6;
-  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0;
 }
 
-.recipe-details {
+.recipe-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
-  color: #cabfae;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
+  gap: 6px;
+}
+
+.chip {
+  font-size: 12.5px;
+  color: var(--ink-body);
+  background: var(--surface-alt);
+  padding: 4px 9px;
+  border-radius: 3px;
+}
+
+.recipe-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
 }
 
 .recipe-grind {
-  color: #a89a8a;
-  font-size: 0.8rem;
-  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.recipe-stars {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--accent);
+  letter-spacing: .1em;
 }

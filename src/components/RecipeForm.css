@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap');
-
 .recipe-form-page {
   min-height: 100vh;
-  background: #1c1410;
+  background: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
 }
 
 .recipe-form-card {
@@ -16,16 +14,16 @@
 }
 
 .recipe-form-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 2.25rem;
-  color: #f5efe6;
+  color: var(--ink);
   margin: 0 0 0.35rem;
   letter-spacing: -0.01em;
 }
 
 .recipe-form-subtitle {
-  color: #a89a8a;
+  color: var(--ink-muted);
   font-size: 0.95rem;
   margin: 0 0 2rem;
 }
@@ -49,31 +47,32 @@
 }
 
 label {
-  color: #cabfae;
+  color: var(--ink-body);
   font-size: 0.85rem;
   font-weight: 500;
 }
 
 input,
 select {
-  background: #2a2019;
-  border: 1px solid #3d2f24;
+  background: var(--surface);
+  border: 1px solid var(--border-input);
   border-radius: 4px;
   padding: 0.65rem 0.75rem;
-  color: #f5efe6;
-  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   transition: border-color 0.15s ease;
 }
 
 input::placeholder {
-  color: #6b5c4c;
+  color: var(--ink-muted);
+  opacity: 0.7;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #c9a227;
+  border-color: var(--accent);
 }
 
 .ratio-display {
@@ -81,38 +80,40 @@ select:focus {
   align-items: baseline;
   justify-content: space-between;
   padding: 0.9rem 1rem;
-  background: rgba(201, 162, 39, 0.08);
-  border-left: 2px solid #c9a227;
+  background: var(--surface-alt);
+  border-left: 3px solid var(--accent);
   border-radius: 2px;
 }
 
 .ratio-label {
-  color: #a89a8a;
+  font-family: var(--font-mono);
+  letter-spacing: .1em;
+  color: var(--ink-muted);
   font-size: 0.8rem;
 }
 
 .ratio-value {
-  font-family: 'Fraunces', serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
-  color: #c9a227;
+  color: var(--accent);
 }
 
 button {
   margin-top: 0.5rem;
-  background: #c9a227;
-  color: #1c1410;
+  background: var(--accent);
+  color: var(--surface);
   border: none;
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
 button:hover:not(:disabled) {
-  opacity: 0.9;
+  background: var(--accent-hover);
 }
 
 button:disabled {
@@ -126,9 +127,9 @@ button:disabled {
 }
 
 .form-message.success {
-  color: #8fb996;
+  color: #4B7A4E;
 }
 
 .form-message.error {
-  color: #d97757;
+  color: #B3261E;
 }

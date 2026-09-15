@@ -1,5 +1,5 @@
 .brew-log-empty {
-  color: #a89a8a;
+  color: var(--ink-muted);
   font-size: 0.9rem;
   text-align: center;
   padding: 1.5rem 0;
@@ -12,8 +12,8 @@
 }
 
 .brew-entry {
-  background: #241b14;
-  border: 1px solid #3d2f24;
+  background: var(--surface);
+  border: 1px solid var(--border-card);
   border-radius: 4px;
   padding: 0.9rem 1rem;
 }
@@ -26,13 +26,14 @@
 }
 
 .brew-date {
-  color: #a89a8a;
+  color: var(--ink-muted);
   font-size: 0.8rem;
 }
 
 .brew-rating {
-  color: #c9a227;
-  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: .1em;
 }
 
 .brew-tags {
@@ -43,15 +44,15 @@
 }
 
 .brew-tag {
-  background: rgba(201, 162, 39, 0.12);
-  color: #c9a227;
+  background: var(--surface-alt);
+  color: var(--accent);
   font-size: 0.75rem;
   padding: 0.15rem 0.5rem;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .brew-notes {
-  color: #cabfae;
+  color: var(--ink-body);
   font-size: 0.85rem;
   margin: 0;
 }

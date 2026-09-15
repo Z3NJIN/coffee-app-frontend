@@ -1,22 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap');
-
 .recipe-detail-page {
   min-height: 100vh;
-  background: #1c1410;
+  background: var(--bg);
   padding: 2rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
   max-width: 640px;
   margin: 0 auto;
 }
 
 .back-link {
-  color: #a89a8a;
+  color: var(--ink-muted);
   text-decoration: none;
   font-size: 0.85rem;
 }
 
 .back-link:hover {
-  color: #f5efe6;
+  color: var(--ink);
 }
 
 .detail-header {
@@ -36,27 +34,27 @@
 }
 
 .edit-link {
-  color: #a89a8a;
+  color: var(--ink-muted);
   font-size: 0.8rem;
   text-decoration: none;
 }
 
 .edit-link:hover {
-  color: #c9a227;
+  color: var(--accent);
 }
 
 .delete-button {
   background: none;
   border: none;
-  color: #a89a8a;
+  color: var(--ink-muted);
   font-size: 0.8rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
   cursor: pointer;
   padding: 0;
 }
 
 .delete-button:hover:not(:disabled) {
-  color: #d97757;
+  color: #B3261E;
 }
 
 .delete-button:disabled {
@@ -65,17 +63,17 @@
 }
 
 .detail-method {
-  color: #a89a8a;
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
   font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: .14em;
 }
 
 .detail-name {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 2rem;
-  color: #f5efe6;
+  color: var(--ink);
   margin: 0.25rem 0 0;
 }
 
@@ -91,42 +89,44 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.9rem 1rem;
-  background: #241b14;
-  border: 1px solid #3d2f24;
+  background: var(--surface);
+  border: 1px solid var(--border-card);
   border-radius: 4px;
 }
 
 .stat-label {
-  color: #a89a8a;
-  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  letter-spacing: .1em;
+  color: var(--ink-muted);
+  font-size: 0.7rem;
 }
 
 .stat-value {
-  color: #f5efe6;
+  color: var(--ink);
   font-size: 1.1rem;
 }
 
 .stat-value.ratio {
-  font-family: 'Fraunces', serif;
-  color: #c9a227;
+  font-family: var(--font-display);
+  color: var(--accent);
   font-size: 1.4rem;
 }
 
 .brew-log-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.1rem;
-  color: #f5efe6;
+  color: var(--ink);
   margin: 0 0 0.75rem;
 }
 
 .detail-state-message {
-  color: #a89a8a;
+  color: var(--ink-muted);
   text-align: center;
   margin-top: 3rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-ui);
 }
 
 .detail-state-message.error {
-  color: #d97757;
+  color: #B3261E;
 }

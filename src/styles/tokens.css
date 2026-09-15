@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Fondos */
+  --bg: #F3EBDF;
+  --surface: #FBF7F0;
+  --surface-alt: #F0E7D8;
+
+  /* Bordes */
+  --border: #E1D5C3;
+  --border-card: #E4D9C8;
+  --border-subtle: #EDE3D3;
+  --border-input: #DCCFBB;
+
+  /* Texto */
+  --ink: #2A211B;
+  --ink-body: #3D332B;
+  --ink-muted: #6E6154;
+
+  /* Acento */
+  --accent: #A8431C;
+  --accent-hover: #7E3113;
+
+  /* Tipografía */
+  --font-display: 'Playfair Display', serif;
+  --font-ui: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: var(--font-ui);
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}

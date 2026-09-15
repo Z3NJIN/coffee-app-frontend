@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllRecipes, methodLabel, BREW_METHODS } from '../api/recipes';
+import { getAverageRating } from '../api/brews';
 import './RecipeList.css';
+
+function starsFor(rating) {
+  if (!rating) return null;
+  const rounded = Math.round(rating);
+  return '★'.repeat(rounded) + '☆'.repeat(5 - rounded);
+}
 
 function RecipeList() {
   const [recipes, setRecipes] = useState([]);
@@ -16,8 +23,22 @@ function RecipeList() {
       setStatus('loading');
       try {
         const data = await getAllRecipes(methodFilter || undefined);
+
+        // El listado no trae el rating promedio, así que se pide aparte
+        // por cada receta y se combina antes de mostrar.
+        const withRatings = await Promise.all(
+          data.map(async (recipe) => {
+            try {
+              const averageRating = await getAverageRating(recipe.id);
+              return { ...recipe, averageRating };
+            } catch {
+              return { ...recipe, averageRating: null };
+            }
+          })
+        );
+
         if (!cancelled) {
-          setRecipes(data);
+          setRecipes(withRatings);
           setStatus('loaded');
         }
       } catch (error) {
@@ -42,7 +63,8 @@ function RecipeList() {
         <div>
           <h1 className="recipe-list-title">Mis recetas</h1>
           <p className="recipe-list-subtitle">
-            {status === 'loaded' && `${recipes.length} receta${recipes.length === 1 ? '' : 's'} registrada${recipes.length === 1 ? '' : 's'}`}
+            {status === 'loaded' &&
+              `${recipes.length} receta${recipes.length === 1 ? '' : 's'} registrada${recipes.length === 1 ? '' : 's'}`}
           </p>
         </div>
 
@@ -72,29 +94,43 @@ function RecipeList() {
 
       {status === 'loaded' && recipes.length > 0 && (
         <div className="recipe-grid">
-          {recipes.map((recipe) => (
-            <Link key={recipe.id} to={`/recipes/${recipe.id}`} className="recipe-card">
-              <div className="recipe-card-header">
-                <span className="recipe-method">{methodLabel(recipe.method)}</span>
-                <span className="recipe-ratio">1 : {recipe.ratio}</span>
-              </div>
-              <h2 className="recipe-name">{recipe.name}</h2>
-              <div className="recipe-details">
-                <span>{recipe.coffeeDoseGrams} g café</span>
-                <span>{recipe.waterDoseGrams} g agua</span>
-                {recipe.temperatureCelsius && <span>{recipe.temperatureCelsius}°C</span>}
-                {recipe.extractionTimeSeconds && (
-                  <span>
-                    {Math.floor(recipe.extractionTimeSeconds / 60)}:
-                    {String(recipe.extractionTimeSeconds % 60).padStart(2, '0')}
+          {recipes.map((recipe) => {
+            const stars = starsFor(recipe.averageRating);
+            return (
+              <Link key={recipe.id} to={`/recipes/${recipe.id}`} className="recipe-card">
+                <div className="recipe-card-header">
+                  <span className="recipe-method">{methodLabel(recipe.method)}</span>
+                  <div className="recipe-ratio-group">
+                    <span className="recipe-ratio-label">RATIO</span>
+                    <span className="recipe-ratio-value">1 : {recipe.ratio}</span>
+                  </div>
+                </div>
+
+                <h2 className="recipe-name">{recipe.name}</h2>
+
+                <div className="recipe-chips">
+                  <span className="chip">{recipe.coffeeDoseGrams} g café</span>
+                  <span className="chip">{recipe.waterDoseGrams} g agua</span>
+                  {recipe.temperatureCelsius && (
+                    <span className="chip">{recipe.temperatureCelsius} °C</span>
+                  )}
+                  {recipe.extractionTimeSeconds && (
+                    <span className="chip">
+                      {Math.floor(recipe.extractionTimeSeconds / 60)}:
+                      {String(recipe.extractionTimeSeconds % 60).padStart(2, '0')}
+                    </span>
+                  )}
+                </div>
+
+                <div className="recipe-card-footer">
+                  <span className="recipe-grind">
+                    {recipe.grindSize ? `Molienda ${recipe.grindSize}` : ''}
                   </span>
-                )}
-              </div>
-              {recipe.grindSize && (
-                <p className="recipe-grind">Molienda: {recipe.grindSize}</p>
-              )}
-            </Link>
-          ))}
+                  {stars && <span className="recipe-stars">{stars}</span>}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

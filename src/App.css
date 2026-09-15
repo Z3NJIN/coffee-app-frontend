@@ -3,27 +3,27 @@
   top: 0;
   z-index: 10;
   display: flex;
-  gap: 1.25rem;
-  padding: 1rem 2rem;
-  background: #1c1410;
-  border-bottom: 1px solid #3d2f24;
+  gap: 28px;
+  padding: 18px 40px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
 
 .app-nav a {
-  color: #a89a8a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  color: var(--ink-muted);
   text-decoration: none;
-  padding: 0.4rem 0.1rem;
+  padding-bottom: 12px;
+  margin-bottom: -1px;
   border-bottom: 2px solid transparent;
 }
 
 .app-nav a.active {
-  color: #f5efe6;
-  border-bottom-color: #c9a227;
+  color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 
 .app-nav a:hover:not(.active) {
-  color: #cabfae;
+  color: var(--ink-body);
 }
