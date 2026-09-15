@@ -1,30 +1,30 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import RecipeForm from './components/RecipeForm';
 import RecipeList from './components/RecipeList';
+import RecipeDetail from './components/RecipeDetail';
 import './App.css';
 
 function App() {
-  const [view, setView] = useState('list'); // 'list' | 'form'
-
   return (
-    <div className="app">
-      <nav className="app-nav">
-        <button
-          className={view === 'list' ? 'active' : ''}
-          onClick={() => setView('list')}
-        >
-          Mis recetas
-        </button>
-        <button
-          className={view === 'form' ? 'active' : ''}
-          onClick={() => setView('form')}
-        >
-          Nueva receta
-        </button>
-      </nav>
+    <BrowserRouter>
+      <div className="app">
+        <nav className="app-nav">
+          <NavLink to="/" end className={({ isActive }) => (isActive ? 'active' : '')}>
+            Mis recetas
+          </NavLink>
+          <NavLink to="/recipes/new" className={({ isActive }) => (isActive ? 'active' : '')}>
+            Nueva receta
+          </NavLink>
+        </nav>
 
-      {view === 'list' ? <RecipeList /> : <RecipeForm />}
-    </div>
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipes/new" element={<RecipeForm />} />
+          <Route path="/recipes/:id" element={<RecipeDetail />} />
+          <Route path="/recipes/:id/edit" element={<RecipeForm />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

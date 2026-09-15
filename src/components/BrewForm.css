@@ -1,0 +1,82 @@
+.brew-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #241b14;
+  border: 1px solid #3d2f24;
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.brew-form-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #f5efe6;
+  margin: 0;
+}
+
+.brew-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.brew-form .field-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.brew-form label {
+  color: #cabfae;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.brew-form input[type='range'] {
+  accent-color: #c9a227;
+}
+
+.brew-form input[type='text'],
+.brew-form textarea {
+  background: #1c1410;
+  border: 1px solid #3d2f24;
+  border-radius: 4px;
+  padding: 0.6rem 0.7rem;
+  color: #f5efe6;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.brew-form input[type='text']:focus,
+.brew-form textarea:focus {
+  outline: none;
+  border-color: #c9a227;
+}
+
+.brew-form button {
+  align-self: flex-start;
+  background: #c9a227;
+  color: #1c1410;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6rem 1.1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.brew-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.brew-form .form-message.error {
+  color: #d97757;
+  font-size: 0.85rem;
+  margin: 0;
+}

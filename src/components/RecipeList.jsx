@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getAllRecipes, methodLabel, BREW_METHODS } from '../api/recipes';
 import './RecipeList.css';
 
@@ -72,7 +73,7 @@ function RecipeList() {
       {status === 'loaded' && recipes.length > 0 && (
         <div className="recipe-grid">
           {recipes.map((recipe) => (
-            <div key={recipe.id} className="recipe-card">
+            <Link key={recipe.id} to={`/recipes/${recipe.id}`} className="recipe-card">
               <div className="recipe-card-header">
                 <span className="recipe-method">{methodLabel(recipe.method)}</span>
                 <span className="recipe-ratio">1 : {recipe.ratio}</span>
@@ -92,7 +93,7 @@ function RecipeList() {
               {recipe.grindSize && (
                 <p className="recipe-grind">Molienda: {recipe.grindSize}</p>
               )}
-            </div>
+            </Link>
           ))}
         </div>
       )}

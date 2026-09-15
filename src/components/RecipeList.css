@@ -67,10 +67,17 @@
 }
 
 .recipe-card {
+  display: block;
+  text-decoration: none;
   background: #241b14;
   border: 1px solid #3d2f24;
   border-radius: 4px;
   padding: 1.25rem;
+  transition: border-color 0.15s ease;
+}
+
+.recipe-card:hover {
+  border-color: #c9a227;
 }
 
 .recipe-card-header {

@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react';
-import { createRecipe, BREW_METHODS } from '../api/recipes';
+import { useState, useMemo, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { createRecipe, updateRecipe, getRecipeById, BREW_METHODS } from '../api/recipes';
 import './RecipeForm.css';
 
 const initialFormState = {
@@ -13,9 +14,47 @@ const initialFormState = {
 };
 
 function RecipeForm() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isEditMode = Boolean(id);
+
   const [form, setForm] = useState(initialFormState);
-  const [status, setStatus] = useState('idle'); // idle | saving | success | error
+  const [status, setStatus] = useState(isEditMode ? 'loading' : 'idle');
+  // idle | loading | saving | success | error
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (!isEditMode) return;
+
+    let cancelled = false;
+    async function loadRecipe() {
+      try {
+        const recipe = await getRecipeById(id);
+        if (cancelled) return;
+        setForm({
+          name: recipe.name,
+          method: recipe.method,
+          coffeeDoseGrams: String(recipe.coffeeDoseGrams),
+          waterDoseGrams: String(recipe.waterDoseGrams),
+          extractionTimeSeconds: recipe.extractionTimeSeconds ?? '',
+          temperatureCelsius: recipe.temperatureCelsius ?? '',
+          grindSize: recipe.grindSize || '',
+        });
+        setStatus('idle');
+      } catch (error) {
+        if (!cancelled) {
+          setErrorMessage(
+            error.response?.data?.message || 'No se pudo cargar la receta.'
+          );
+          setStatus('error');
+        }
+      }
+    }
+    loadRecipe();
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isEditMode]);
 
   const ratio = useMemo(() => {
     const coffee = parseFloat(form.coffeeDoseGrams);
@@ -34,22 +73,29 @@ function RecipeForm() {
     setStatus('saving');
     setErrorMessage('');
 
+    const payload = {
+      name: form.name,
+      method: form.method,
+      coffeeDoseGrams: parseFloat(form.coffeeDoseGrams),
+      waterDoseGrams: parseFloat(form.waterDoseGrams),
+      extractionTimeSeconds: form.extractionTimeSeconds
+        ? parseInt(form.extractionTimeSeconds, 10)
+        : null,
+      temperatureCelsius: form.temperatureCelsius
+        ? parseInt(form.temperatureCelsius, 10)
+        : null,
+      grindSize: form.grindSize || null,
+    };
+
     try {
-      await createRecipe({
-        name: form.name,
-        method: form.method,
-        coffeeDoseGrams: parseFloat(form.coffeeDoseGrams),
-        waterDoseGrams: parseFloat(form.waterDoseGrams),
-        extractionTimeSeconds: form.extractionTimeSeconds
-          ? parseInt(form.extractionTimeSeconds, 10)
-          : null,
-        temperatureCelsius: form.temperatureCelsius
-          ? parseInt(form.temperatureCelsius, 10)
-          : null,
-        grindSize: form.grindSize || null,
-      });
-      setStatus('success');
-      setForm(initialFormState);
+      if (isEditMode) {
+        await updateRecipe(id, payload);
+        navigate(`/recipes/${id}`);
+      } else {
+        await createRecipe(payload);
+        setStatus('success');
+        setForm(initialFormState);
+      }
     } catch (error) {
       setStatus('error');
       const message =
@@ -58,12 +104,20 @@ function RecipeForm() {
     }
   }
 
+  if (status === 'loading') {
+    return <p className="detail-state-message">Cargando receta…</p>;
+  }
+
   return (
     <div className="recipe-form-page">
       <div className="recipe-form-card">
-        <h1 className="recipe-form-title">Nueva receta</h1>
+        <h1 className="recipe-form-title">
+          {isEditMode ? 'Editar receta' : 'Nueva receta'}
+        </h1>
         <p className="recipe-form-subtitle">
-          Registra los parámetros de tu preparación.
+          {isEditMode
+            ? 'Ajusta los parámetros de esta receta.'
+            : 'Registra los parámetros de tu preparación.'}
         </p>
 
         <form onSubmit={handleSubmit} className="recipe-form">
@@ -107,7 +161,7 @@ function RecipeForm() {
                 min="0"
                 value={form.coffeeDoseGrams}
                 onChange={handleChange}
-                placeholder="20"
+                placeholder="18"
                 required
               />
             </div>
@@ -122,7 +176,7 @@ function RecipeForm() {
                 min="0"
                 value={form.waterDoseGrams}
                 onChange={handleChange}
-                placeholder="300"
+                placeholder="288"
                 required
               />
             </div>
@@ -176,7 +230,11 @@ function RecipeForm() {
           </div>
 
           <button type="submit" disabled={status === 'saving'}>
-            {status === 'saving' ? 'Guardando…' : 'Guardar receta'}
+            {status === 'saving'
+              ? 'Guardando…'
+              : isEditMode
+                ? 'Guardar cambios'
+                : 'Guardar receta'}
           </button>
 
           {status === 'success' && (

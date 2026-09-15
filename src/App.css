@@ -3,29 +3,27 @@
   top: 0;
   z-index: 10;
   display: flex;
-  gap: 0.5rem;
+  gap: 1.25rem;
   padding: 1rem 2rem;
   background: #1c1410;
   border-bottom: 1px solid #3d2f24;
 }
 
-.app-nav button {
-  background: transparent;
-  border: none;
+.app-nav a {
   color: #a89a8a;
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
+  text-decoration: none;
   padding: 0.4rem 0.1rem;
-  cursor: pointer;
   border-bottom: 2px solid transparent;
 }
 
-.app-nav button.active {
+.app-nav a.active {
   color: #f5efe6;
   border-bottom-color: #c9a227;
 }
 
-.app-nav button:hover:not(.active) {
+.app-nav a:hover:not(.active) {
   color: #cabfae;
 }
